@@ -48,7 +48,7 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth, $startX, $startY)
 	// Write to the image    
     $y = $startY;
     foreach ($lines as $line) {
-    	$image->annotateImage($draw, $startX, $startY, 0, $line);
+    	$image->annotateImage($draw, $startX, $y, 0, $line);
     	$y += $lineHeight;
     }
 }
