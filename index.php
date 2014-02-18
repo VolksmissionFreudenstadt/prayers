@@ -48,6 +48,7 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth, $startX, $startY)
 	// Write to the image    
     $y = $startY;
     foreach ($lines as $line) {
+    	if (substr($line, 0, 1)==utf8_decode('·')) $line=trim(substr($line, 2));
     	$image->annotateImage($draw, $startX, $y, 0, $line);
     	$y += $lineHeight;
     }
@@ -139,7 +140,7 @@ foreach ($pp as $key => $val) {
 	$pp[$key] = count($val) ? join(', ', $val).' und '.$last : $last;
 }
 
-$text = join ('; ', $pp);
+$text = join (utf8_decode(' · '), $pp);
 
 // get people for blessing
 
