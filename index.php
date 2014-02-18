@@ -3,36 +3,35 @@
 
 
 /**
-* Implement word wrapping... Ughhh... why is this NOT done for me!!!
-* OK... I know the algorithm sucks at efficiency, but it's for short messages, okay?
-*
+* Implement word wrapping... 
+* 
 * Make sure to set the font on the ImagickDraw Object first!
+*
 * @author BMiner
+* @author Christoph Fischer <chris@toph.de>
 * @link http://stackoverflow.com/questions/5746537/how-can-i-draw-wrapped-text-using-imagick-in-php/5746551#5746551
 * @param image the Imagick Image Object
 * @param draw the ImagickDraw Object
 * @param text the text you want to wrap
 * @param maxWidth the maximum width in pixels for your wrapped "virtual" text box
-* @return an array of lines and line heights
+* @param startX the x coordinate of the text
+* @param startY the y coordinate of the text
+* @return void
 */
-function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
-{
+function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth, $startX, $startY) {
     $words = explode(" ", $text);
     $lines = array();
     $i = 0;
     $lineHeight = 0;
-    while($i < count($words) )
-    {
+    while($i < count($words) ) {
         $currentLine = $words[$i];
-        if($i+1 >= count($words))
-        {
+        if($i+1 >= count($words)) {
             $lines[] = $currentLine;
             break;
         }
         //Check to see if we can add another word to this line
         $metrics = $image->queryFontMetrics($draw, $currentLine . ' ' . $words[$i+1]);
-        while($metrics['textWidth'] <= $maxWidth)
-        {
+        while($metrics['textWidth'] <= $maxWidth) {
             //If so, do it and keep doing it!
             $currentLine .= ' ' . $words[++$i];
             if($i+1 >= count($words))
@@ -43,10 +42,15 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
         $lines[] = $currentLine;
         $i++;
         //Finally, update line height
-        if($metrics['textHeight'] > $lineHeight)
+        if($metrics['textHeight'] > $lineHeight) 
             $lineHeight = $metrics['textHeight'];
     }
-    return array($lines, $lineHeight);
+	// Write to the image    
+    $y = $startY;
+    foreach ($lines as $line) {
+    	$img->annotateImage($draw, $startX, $startY, 0, $line);
+    	$y += $lineHeight;
+    }
 }
 
 
@@ -63,20 +67,10 @@ function createImage ($config, $text, $blessing) {
 	$draw->setFontSize(43);
 	
 	// blessing
-	$t = wordWrapAnnotation ($img, $draw, $blessing, 1000);
-	$y = 100;
-	foreach ($t[0] as $line) {
-		$img->annotateImage($draw, 12, $y, 0, $line);
-		$y += $t[1];
-	}
+	wordWrapAnnotation ($img, $draw, $blessing, 944, 40, 100);
 		
 	// prayer
-	$t = wordWrapAnnotation ($img, $draw, $text, 1000);
-	$y = 400;
-	foreach ($t[0] as $line) {
-		$img->annotateImage($draw, 12, $y, 0, $line);
-		$y += $t[1];
-	}
+	wordWrapAnnotation ($img, $draw, $text, 944, 40, 400);
 	
 
 	// write the image to the output folder
