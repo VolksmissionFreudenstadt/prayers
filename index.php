@@ -119,8 +119,8 @@ $db = new mysqli ($config['kOOL']['db']['host'],
 					 
 $res = $db->query('SELECT * FROM ko_leute WHERE FIND_IN_SET(\''
 				  .sprintf('g%06d:r%06d', 
-				  		   $config['kOOL']['prayer']['group']['id'], 
-				  		   $config['kOOL']['prayer']['group']['role'])
+				  		   $config['kOOL']['prayers']['group']['id'], 
+				  		   $config['kOOL']['prayers']['group']['role'])
 				  .'\', groups);');
 
 $p = array();
