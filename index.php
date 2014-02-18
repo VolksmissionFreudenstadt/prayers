@@ -17,4 +17,16 @@ $res = $db->query('SELECT * FROM ko_leute WHERE FIND_IN_SET(\''
 $p = array();
 while ($row = $res->fetch_assoc()) $p[] = $row;
 
-die ('<pre>'.print_r($p, 1));
+
+// do some name sorting:
+$pp = array();
+foreach ($p as $person) {
+	$pp[$p['nachname']][] = $p['vorname'];
+}
+
+foreach ($pp as $key => $val) {
+	$x = count ($val);
+	$pp[$key] = join(', ', $val);
+}
+
+die ('<pre>'.print_r($pp, 1));
