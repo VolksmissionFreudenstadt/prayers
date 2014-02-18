@@ -50,7 +50,7 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
 }
 
 
-function createImage ($config, $text) {
+function createImage ($config, $blessing) {
 	// create the image
 	$img = new Imagick();
 	$img->newImage (1024, 768, new ImagickPixel('white'));
@@ -62,9 +62,17 @@ function createImage ($config, $text) {
 	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-Regular.ttf');
 	$draw->setFontSize(43);
 	
-	// first text
+	// blessing
+	$t = wordWrapAnnotation ($img, $draw, $blessing, 1000);
+	$y = 100;
+	foreach ($t[0] as $line) {
+		$img->annotateImage($draw, 12, $y, 0, $line);
+		$y += $t[1];
+	}
+		
+	// prayer
 	$t = wordWrapAnnotation ($img, $draw, $text, 1000);
-	$y = 12;
+	$y = 400;
 	foreach ($t[0] as $line) {
 		$img->annotateImage($draw, 12, $y, 0, $line);
 		$y += $t[1];
