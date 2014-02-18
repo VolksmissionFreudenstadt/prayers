@@ -75,8 +75,8 @@ function createImage ($config, $text, $blessing) {
 	
 	// headings
 	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-ExtraBold.ttf');
-	wordWrapAnnotation ($img, $draw, 'Diese Woche beten wir besonders für:', 944, 40, 100);
-	wordWrapAnnotation ($img, $draw, 'Geschwister, die nicht mehr zum Gottesdienst kommen können:', 944, 40, 340);
+	wordWrapAnnotation ($img, $draw, $config['headers']['blessing'], 944, 40, 100);
+	wordWrapAnnotation ($img, $draw, $config['headers']['prayers'], 944, 40, 340);
 				
 
 	// write the image to the output folder
