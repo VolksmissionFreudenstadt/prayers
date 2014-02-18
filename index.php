@@ -107,6 +107,8 @@ $db = new mysqli ($config['kOOL']['db']['host'],
 				  $config['kOOL']['db']['name']);
 					 
 
+// get people for prayer 					 
+					 
 $res = $db->query('SELECT * FROM ko_leute WHERE FIND_IN_SET(\''
 				  .sprintf('g%06d:r%06d', 
 				  		   $config['kOOL']['prayer']['group']['id'], 
@@ -132,8 +134,14 @@ foreach ($pp as $key => $val) {
 
 $text = join ('; ', $pp);
 
+// get people for blessing
+
+$res = $db->query('SELECT title FROM `ko_event` WHERE `eventgruppen_id`='.$config['kOOL']['blessing']['group'].' and `startdatum`=\''.strtime('%Y-%m-%d', $startDate).'\'');
+list($blessing) = $res->fetch_assoc();
+
+
 //die ($text);
-$fn = createImage($config, $text);
+$fn = createImage($config, $text, $blessing);
 echo '<html><head></head><body style="background-color: black;">';
 echo '<img src="output/'.$fn.'" />';
 
