@@ -70,7 +70,7 @@ function createImage ($config, $text, $blessing) {
 	wordWrapAnnotation ($img, $draw, $blessing, 944, 40, 160);
 		
 	// prayer
-	wordWrapAnnotation ($img, $draw, $text, 944, 40, 400);
+	wordWrapAnnotation ($img, $draw, $text, 944, 40, 460);
 	
 	// headings
 	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-ExtraBold.ttf');
