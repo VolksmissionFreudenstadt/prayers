@@ -50,7 +50,7 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
 }
 
 
-function createImage ($config, $blessing) {
+function createImage ($config, $text, $blessing) {
 	// create the image
 	$img = new Imagick();
 	$img->newImage (1024, 768, new ImagickPixel('white'));
