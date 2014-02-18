@@ -84,7 +84,7 @@ function createImage ($config, $text, $blessing) {
 	// write the image to the output folder
 	$fileBaseName = $config['output']['prefix'].'.'.$config['output']['suffix'];
 	$fileName = $config['output']['path'].'/'.$fileBaseName;
-	//echo 'Erstelle Folie als '.$fileName.' ...<br />';
+	echo 'Erstelle Folie als '.$fileName.' ...<br />';
 	$img->writeImage($fileName);
 	
 	return $fileBaseName;
@@ -153,7 +153,5 @@ $blessing = $blessing['title'];
 
 //die ($text);
 $fn = createImage($config, $text, $blessing);
-echo '<html><head></head><body style="background-color: black;">';
-echo '<img src="output/'.$fn.'" />';
 
 
