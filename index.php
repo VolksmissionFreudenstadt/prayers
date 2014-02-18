@@ -26,9 +26,9 @@ foreach ($p as $person) {
 ksort($pp);
 
 foreach ($pp as $key => $val) {
-	$x = count ($val);
 	asort($val);
-	$pp[$key] = join(', ', $val);
+	$last = array_pop($val).' '.$key;
+	$pp[$key] = count($val) ? join(', ', $val).' und '.$last : $last;
 }
 
 
