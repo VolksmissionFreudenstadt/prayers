@@ -63,7 +63,7 @@ function createImage ($config, $text) {
 	$draw->setFontSize(43);
 	
 	// first text
-	$img->annotateImage($draw, 30, 40, 0, $test);
+	$img->annotateImage($draw, 30, 40, 0, $text);
 	
 
 	// write the image to the output folder
