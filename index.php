@@ -67,7 +67,7 @@ function createImage ($config, $text) {
 	
 
 	// write the image to the output folder
-	$fileBaseName = $config['output']['prefix'].str_pad($index, 3, '0', STR_PAD_LEFT).'.jpg';
+	$fileBaseName = $config['output']['prefix'].'.jpg';
 	$fileName = $config['output']['path'].'/'.$fileBaseName;
 	//echo 'Erstelle Folie als '.$fileName.' ...<br />';
 	$img->writeImage($fileName);
@@ -79,7 +79,7 @@ function createImage ($config, $text) {
 //================================================================================================
 
 $config = yaml_parse_file('config.yaml');
-$confg['output']['prefix'] = strftime($confg['output']['prefix']);
+$config['output']['prefix'] = strftime($config['output']['prefix']);
 
 $db = new mysqli ($config['kOOL']['db']['host'], 
 				  $config['kOOL']['db']['user'], 
