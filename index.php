@@ -79,6 +79,7 @@ function createImage ($config, $text) {
 //================================================================================================
 
 $config = yaml_parse_file('config.yaml');
+$confg['output']['prefix'] = strftime($confg['output']['prefix']);
 
 $db = new mysqli ($config['kOOL']['db']['host'], 
 				  $config['kOOL']['db']['user'], 
