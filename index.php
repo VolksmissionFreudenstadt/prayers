@@ -84,7 +84,12 @@ function getTime($s, $hour=0, $minute=0, $second=0, $base=NULL) {
 
 //================================================================================================
 
-$config = yaml_parse_file('config.yaml');
+// global config
+define('CONFIG_FILE_NAME', 'config.yaml');
+try {
+	if (!file_exists(CONFIG_FILE_NAME)) throw new Exception('Konfigurationsdatei '.CONFIG_FILE_NAME.' nicht gefunden.');
+	$config = yaml_parse(file_get_contents(CONFIG_FILE_NAME));	
+} catch (Exception $e) {}
 
 
 // get "next sunday"
