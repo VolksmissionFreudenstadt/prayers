@@ -66,7 +66,7 @@ function createImage ($config, $text) {
 	$t = wordWrapAnnotation ($img, $draw, $text, 1000);
 	$y = 12;
 	foreach ($t[0] as $line) {
-		$img->annotateImage($draw, 12, 40, 0, $text);
+		$img->annotateImage($draw, 12, 40, 0, $line);
 		$y += $t[1];
 	}
 	
