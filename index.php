@@ -145,7 +145,8 @@ $text = join ('; ', $pp);
 // get people for blessing
 
 $res = $db->query('SELECT title FROM `ko_event` WHERE `eventgruppen_id`='.$config['kOOL']['blessing']['group'].' and `startdatum`=\''.strftime('%Y-%m-%d', $startDate).'\'');
-list($blessing) = $res->fetch_assoc();
+$blessing = $res->fetch_assoc();
+$blessing = $blessing['title'];
 
 
 //die ($text);
