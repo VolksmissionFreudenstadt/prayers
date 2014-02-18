@@ -129,6 +129,7 @@ $text = join ('; ', $pp);
 
 //die ($text);
 $fn = createImage($config, $text);
+echo '<html><head></head><body style="background-color: black;">';
 echo '<img src="output/'.$fn.'" />';
 
 
