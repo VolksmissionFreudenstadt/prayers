@@ -31,5 +31,6 @@ foreach ($pp as $key => $val) {
 	$pp[$key] = count($val) ? join(', ', $val).' und '.$last : $last;
 }
 
+$text = join ('; ', $pp);
 
-die ('<pre>'.print_r($pp, 1));
+die ($text);
