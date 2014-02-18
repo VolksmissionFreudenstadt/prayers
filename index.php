@@ -58,29 +58,31 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth, $startX, $startY)
 function createImage ($config, $text, $blessing) {
 	// create the image
 	$img = new Imagick();
-	$img->newImage (1024, 768, new ImagickPixel('white'));
-	$img->setImageFormat('jpeg');
+	$img->newImage ($config['image']['width'], $config['image']['height'], new ImagickPixel($config['image']['background']));
+	$img->setImageFormat($config['image']['format']);
 	
 	// font settings
 	$draw = new ImagickDraw();
-	$draw->setFillColor('black');
-	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-Regular.ttf');
-	$draw->setFontSize(43);
+	$draw->setFillColor($config['layout']['fonts']['default']['color']);
+	$draw->setFont(dirname(__FILE__).'/fonts/'.$config['layout']['fonts']['default']['file']);
+	$draw->setFontSize($config['layout']['fonts']['default']['size']);
 	
 	// blessing
-	wordWrapAnnotation ($img, $draw, $blessing, 944, 40, 160);
+	wordWrapAnnotation ($img, $draw, $blessing, $config['layout']['width'], $config['layout']['x'], $config['layout']['blessing']['y']);
 		
 	// prayer
-	wordWrapAnnotation ($img, $draw, $text, 944, 40, 460);
+	wordWrapAnnotation ($img, $draw, $text, $config['layout']['width'], $config['layout']['x'], $config['layout']['prayers']['y']);
 	
 	// headings
-	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-ExtraBold.ttf');
-	wordWrapAnnotation ($img, $draw, $config['headers']['blessing'], 944, 40, 100);
-	wordWrapAnnotation ($img, $draw, $config['headers']['prayers'], 944, 40, 340);
+	$draw->setFillColor($config['layout']['fonts']['headers']['color']);
+	$draw->setFont(dirname(__FILE__).'/fonts/'.$config['layout']['fonts']['headers']['file']);
+	$draw->setFontSize($config['layout']['fonts']['headers']['size']);
+	wordWrapAnnotation ($img, $draw, $config['headers']['blessing'], $config['layout']['width'], $config['layout']['x'], $config['layout']['blessing']['header_y']);
+	wordWrapAnnotation ($img, $draw, $config['headers']['prayers'], $config['layout']['width'], $config['layout']['x'], $config['layout']['prayers']['header_y']);
 				
 
 	// write the image to the output folder
-	$fileBaseName = $config['output']['prefix'].'.jpg';
+	$fileBaseName = $config['output']['prefix'].'.'.$config['output']['suffix'];
 	$fileName = $config['output']['path'].'/'.$fileBaseName;
 	//echo 'Erstelle Folie als '.$fileName.' ...<br />';
 	$img->writeImage($fileName);
