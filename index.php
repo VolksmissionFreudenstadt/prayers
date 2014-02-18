@@ -67,11 +67,16 @@ function createImage ($config, $text, $blessing) {
 	$draw->setFontSize(43);
 	
 	// blessing
-	wordWrapAnnotation ($img, $draw, $blessing, 944, 40, 100);
+	wordWrapAnnotation ($img, $draw, $blessing, 944, 40, 160);
 		
 	// prayer
 	wordWrapAnnotation ($img, $draw, $text, 944, 40, 400);
 	
+	// headings
+	$draw->setFont(dirname(__FILE__).'/fonts/OpenSans-ExtraBold.ttf');
+	wordWrapAnnotation ($img, $draw, 'Diese Woche beten wir besonders für:', 944, 40, 100);
+	wordWrapAnnotation ($img, $draw, 'Geschwister, die nicht mehr zum Gottesdienst kommen können:', 944, 40, 340);
+				
 
 	// write the image to the output folder
 	$fileBaseName = $config['output']['prefix'].'.jpg';
