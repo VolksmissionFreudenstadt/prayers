@@ -128,7 +128,7 @@ foreach ($pp as $key => $val) {
 $text = join ('; ', $pp);
 
 //die ($text);
-$fn = createImage($config, $text, $startDate);
+$fn = createImage($config, $text);
 echo '<img src="output/'.$fn.'" />';
 
 
