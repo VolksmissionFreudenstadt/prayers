@@ -76,10 +76,20 @@ function createImage ($config, $text) {
 }
 
 
+function getTime($s, $hour=0, $minute=0, $second=0, $base=NULL) {
+	if (!is_null($base)) $tmp = strtotime($s, $base); else $tmp = strtotime($s);
+	return mktime($hour, $minute, $second, strftime('%m', $tmp), strftime('%d', $tmp), strftime('%Y', $tmp));
+}
+
+
 //================================================================================================
 
 $config = yaml_parse_file('config.yaml');
-$config['output']['prefix'] = strftime($config['output']['prefix']);
+
+
+// get "next sunday"
+if (strftime('%w')) $startDate=getTime('next Sunday', 11); else $startDate = getTime('now', 11);
+$config['output']['prefix'] = strftime($config['output']['prefix'], $startDate);
 
 $db = new mysqli ($config['kOOL']['db']['host'], 
 				  $config['kOOL']['db']['user'], 
@@ -113,7 +123,7 @@ foreach ($pp as $key => $val) {
 $text = join ('; ', $pp);
 
 //die ($text);
-$fn = createImage($config, $text);
+$fn = createImage($config, $text, $startDate);
 echo '<img src="output/'.$fn.'" />';
 
 
