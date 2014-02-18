@@ -21,16 +21,15 @@ while ($row = $res->fetch_assoc()) $p[] = $row;
 // do some name sorting:
 $pp = array();
 foreach ($p as $person) {
-	if ($pp[$person['nachname']]) $pp[$person['nachname']] .= ', ';
-	$pp[$person['nachname']] .= $person['vorname'];
+	$pp[$person['nachname']][] = $person['vorname'];
 }
 ksort($pp);
 
-/*
 foreach ($pp as $key => $val) {
 	$x = count ($val);
+	asort($val);
 	$pp[$key] = join(', ', $val);
 }
-*/
+
 
 die ('<pre>'.print_r($pp, 1));
