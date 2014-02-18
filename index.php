@@ -114,6 +114,6 @@ $text = join ('; ', $pp);
 
 //die ($text);
 $fn = createImage($config, $text);
-echo '<img src="'.$fn.'" />';
+echo '<img src="output/'.$fn.'" />';
 
 
