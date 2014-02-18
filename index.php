@@ -64,8 +64,11 @@ function createImage ($config, $text) {
 	
 	// first text
 	$t = wordWrapAnnotation ($img, $draw, $text, 1000);
-	die ('<pre>'.print_r($t, 1));
-	$img->annotateImage($draw, 12, 40, 0, $text);
+	$y = 12;
+	foreach ($t[0] as $line) {
+		$img->annotateImage($draw, 12, 40, 0, $text);
+		$y += $t[1];
+	}
 	
 
 	// write the image to the output folder
