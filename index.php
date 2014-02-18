@@ -63,7 +63,9 @@ function createImage ($config, $text) {
 	$draw->setFontSize(43);
 	
 	// first text
-	$img->annotateImage($draw, 30, 40, 0, $text);
+	$t = wordWrapAnnotation ($img, $draw, $text, 1000);
+	die ('<pre>'.print_r($t, 1));
+	$img->annotateImage($draw, 12, 40, 0, $text);
 	
 
 	// write the image to the output folder
