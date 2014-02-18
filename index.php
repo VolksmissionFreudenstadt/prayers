@@ -68,10 +68,10 @@ function createImage ($config, $text, $blessing) {
 	$draw->setFontSize($config['layout']['fonts']['default']['size']);
 	
 	// blessing
-	wordWrapAnnotation ($img, $draw, $blessing, $config['layout']['width'], $config['layout']['x'], $config['layout']['blessing']['y']);
+	wordWrapAnnotation ($img, $draw, $blessing, $config['layout']['width'], $config['layout']['x'], $config['layout']['blessing']['_y']);
 		
 	// prayer
-	wordWrapAnnotation ($img, $draw, $text, $config['layout']['width'], $config['layout']['x'], $config['layout']['prayers']['y']);
+	wordWrapAnnotation ($img, $draw, $text, $config['layout']['width'], $config['layout']['x'], $config['layout']['prayers']['_y']);
 	
 	// headings
 	$draw->setFillColor($config['layout']['fonts']['headers']['color']);
