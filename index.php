@@ -119,7 +119,8 @@ $db = new mysqli ($config['kOOL']['db']['host'],
 
 // get people for prayer 					 
 					 
-$res = $db->query('SELECT * FROM ko_leute WHERE FIND_IN_SET(\''
+$res = $db->query('SELECT * FROM ko_leute WHERE (deleted=0) AND (hidden=0) AND '
+				  .'FIND_IN_SET(\''
 				  .sprintf('g%06d:r%06d', 
 				  		   $config['kOOL']['prayers']['group']['id'], 
 				  		   $config['kOOL']['prayers']['group']['role'])
